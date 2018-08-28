@@ -11,21 +11,30 @@
 #include<grp.h>
 #include "Listing.h"
 using namespace std;
-void list(void)
+vector<string> list(char c[])
 {
+    cout<<"\nlist Chal rha hai";
     DIR *d;
     struct stat *buf;
     struct dirent *dir;//dir will get directory names for every directory in the given directory
     char buffer[1000];//it will get the name of current directory from getcwd()
     vector<string> dirname;//vector will use to sort the file name using algorithm STL
-    d = opendir(getcwd(buffer,1000));//d will get the current directorie's path
+    cout<<"\nPassed argument :"<<c;
+    d = opendir(c);//d will get the current directorie's path
+    cout<<"\nDirectories value :"<<d;
     if (d)
     {
-        while ((dir = readdir(d)) != NULL)
+        while ((dir = readdir(d))!=NULL)
         {
+            cout<<"\nDirectories value :"<<dir->d_name;
+	    cout.flush();
             dirname.push_back(dir->d_name);//every directory is pushed in vector
         }
         closedir(d);
+    }
+    else
+    {
+        cout<<"\n Dir if not executed";
     }
     vector<string> :: iterator  itr;
     sort(dirname.begin(),dirname.end());//names of directories will be sorted by this
@@ -54,5 +63,6 @@ void list(void)
 	    cout<<"\n";
 	    itr++;
     }
+    return  dirname;
 }
 

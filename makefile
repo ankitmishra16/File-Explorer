@@ -1,7 +1,7 @@
 CC = g++
-CFLAGS = -Wall -std=c++1z
-DEPS = Listing.h
-OBJ = list.o Main.o
+CFLAGS = -g -Wall -std=c++1z
+DEPS = Listing.h Cursor.h
+OBJ = Cursor.o list.o Main.o
 %.o: %.cpp $(DEPS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
