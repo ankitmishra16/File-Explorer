@@ -14,14 +14,16 @@
 using namespace std;
 int main()
 {
-	getchar();
- char str[1000]="";
- cout<<"In the main\n";
+ char str[1000]="", fpath[1000][1000], bpath[1000][1000]; //fpath for forward paths and bpath for backward path
+ int forwardstacktop,backwardstacktop;//fp will be stack top of fpath stack, and bp will be stack top of backward path
+ forwardstacktop=0;
+ backwardstacktop=0;
  cout<<str<<"\n";
  getcwd(str,1000);
- cout<<str<<"\n";
+ strcpy(bpath[0],str);
  cout<<"\n Calling Cursor";
- Cursor(str);
+ //Cursor(path,root,forward stack, forward stack top, backward stack, backward stack top)
+ Cursor(str,str,fpath,forwardstacktop,bpath,++backwardstacktop);
  //str="home/Documents";
  //vector<string> ls=list(str);
  return 0;
