@@ -66,6 +66,7 @@ vector<string> list(char c[])
 	    cout<<(string)*itr;
 	    cout<<"\n";
 	    itr++;
+        //cout<<"Root directory :"<<rootm;
     }
     return  dirname;
 }

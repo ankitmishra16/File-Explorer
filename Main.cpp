@@ -18,10 +18,10 @@ int main()
  int forwardstacktop,backwardstacktop;//fp will be stack top of fpath stack, and bp will be stack top of backward path
  forwardstacktop=0;
  backwardstacktop=0;
- cout<<str<<"\n";
- getcwd(str,1000);
+ //cout<<str<<"\n";
+ getcwd(str,sizeof(str));
  strcpy(bpath[0],str);
- cout<<"\n Calling Cursor";
+ //cout<<"\n Calling Cursor";
  //Cursor(path,root,forward stack, forward stack top, backward stack, backward stack top)
  Cursor(str,str,fpath,forwardstacktop,bpath,++backwardstacktop);
  //str="home/Documents";
