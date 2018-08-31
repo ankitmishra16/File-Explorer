@@ -57,6 +57,7 @@ void Cursor(char c[], char rootm[], char fpath[][1000], int forwardstacktop, cha
 	        		 	strcpy(bpath[backwardstacktop++],c);
 	        		 	tcsetattr(0, TCSANOW, &org_attr);
 	        		 	Cursor(fpath[--forwardstacktop],rootm,fpath,forwardstacktop,bpath,backwardstacktop);
+	        		 	return;
 	        		 }
 	        		 else
 	        		 {
@@ -69,6 +70,7 @@ void Cursor(char c[], char rootm[], char fpath[][1000], int forwardstacktop, cha
 	        		 	strcpy(fpath[forwardstacktop++],c);
 	        		 	tcsetattr(0, TCSANOW, &org_attr);
 	        		 	Cursor(bpath[--backwardstacktop],rootm,fpath,forwardstacktop,bpath,backwardstacktop);
+	        		 	return;
 
 	        		 }
 	        		 else
@@ -89,8 +91,8 @@ void Cursor(char c[], char rootm[], char fpath[][1000], int forwardstacktop, cha
 	        			strcpy(V,c);
 	        			strcat(V,aa);
 	        			strcat(V,ls[counter-1].c_str());
-	        			
-	        			if(!S_ISDIR(buf.st_mode))
+	        			//cout<<(S_ISDIR(buf.st_mode))<<"\n";
+	        			if((S_ISDIR(buf.st_mode)))
 	        			{
 
 	        				//cout<<"INSIDE IF\n";
@@ -105,6 +107,12 @@ void Cursor(char c[], char rootm[], char fpath[][1000], int forwardstacktop, cha
 	        			}
 	        			else
 	        			{
+	        				if(counter==1)
+	        				{
+	        					tcsetattr(0, TCSANOW, &org_attr);
+	        		 			Cursor(c,rootm,fpath,forwardstacktop,bpath,backwardstacktop);	
+	        		 			return;
+	        				}
 		        			if(counter==2)
 		        			{
 		        				cout<<"going to parent directory";
@@ -127,14 +135,17 @@ void Cursor(char c[], char rootm[], char fpath[][1000], int forwardstacktop, cha
 							}
 								tcsetattr(0, TCSANOW, &org_attr);
 								forwardstacktop=0;
-							Cursor(c,rootm,fpath,forwardstacktop,bpath,backwardstacktop);  
+								Cursor(c,rootm,fpath,forwardstacktop,bpath,backwardstacktop);  
+								return;
 						}
 						//cout<<"Value of counter :"<<counter;
 						break;
 			case 'h' :   tcsetattr(0, TCSANOW, &org_attr);
 						 cout<<"Root Directory :"<<rootm;
 						 strcpy(bpath[backwardstacktop++],c);
-						 //Cursor(rootm,rootm,fpath,forwardstacktop,bpath,backwardstacktop);
+						 strcpy(c,rootm);
+						 tcsetattr(0, TCSANOW, &org_attr);
+						 Cursor(c,rootm,fpath,forwardstacktop,bpath,backwardstacktop);
 						 break;
 			case 127 :	int i=strlen(c)-1;
 							cout<<"in backspace\n";
@@ -148,7 +159,9 @@ void Cursor(char c[], char rootm[], char fpath[][1000], int forwardstacktop, cha
 	        					}
 	        					i--;
 	        				} 
+	        				tcsetattr(0, TCSANOW, &org_attr);
 	        				Cursor(c,rootm,fpath,forwardstacktop,bpath,backwardstacktop);
+	        				return;
 			//default : cout<<"It is default";			 
 								
 		}
