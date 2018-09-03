@@ -28,21 +28,13 @@ void executeCmd(string cmd,char c[], char rootm[], char fpath[][1000], int forwa
 						int in, out, nread;
 						for(i=1;i<cmdchuncks.size()-1;i++)
 						{
-								//cout<<"\n File name :"<<cmdchuncks[i];
-								//cout<<"\n Vector entry for Destintion :"<<cmdchuncks[cmdchuncks.size()-1];
 								strcpy(file,c);
 								strcat(file,"/");
 								strcat(file,cmdchuncks[i].c_str());
-								//cout<<"\n flie path :"<<file;
 								strcpy(di,rootm);
 								strcat(di,"/");
-								//cout<<"\n Destintion path :"<<di;
 								strcat(di,cmdchuncks[cmdchuncks.size()-1].c_str());
-								//cout<<"\n Destination directory :"<<cmdchuncks[cmdchuncks.size()-1];
-								//cout<<"\n Destintion path(before appending file name) :"<<di;
 								strcat(di,cmdchuncks[i].c_str());
-								//cout<<"\n Destintion path :"<<di;
-								//cin>>in;
 								in=open(file,O_RDONLY);
 								out=open(di,O_WRONLY|O_CREAT, S_IRUSR| S_IXUSR|S_IRGRP|S_IWUSR|S_IWGRP|S_IXGRP);
 								while(((nread=read(in,block,sizeof(block))))>0)

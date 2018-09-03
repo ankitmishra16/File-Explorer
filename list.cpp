@@ -64,6 +64,7 @@ vector<string> list(char c[])
 	    cout<<(int)buf.st_size<<"\t";
 	    cout<<((string)(ctime(&buf.st_mtime))).substr(0,19)<<"\t";
 	    cout<<(string)*itr;
+        //printf("%.20s", (string)*itr);
 	    cout<<"\n";
 	    itr++;
         //cout<<"Root directory :"<<rootm;
